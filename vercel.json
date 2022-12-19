@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/:match*",
-      "destination": "/vue-img-fade/:match*"
+      "destination": "/",
+      "source": "/vue-img-fade/"
     }
   ]
 }
