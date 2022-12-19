@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:docs": "vue-tsc && vite build --base /vue-img-fade/",
+    "build:docs": "vue-tsc && vite build",
     "build:bundle": "vue-tsc && BUNDLE=true vite build",
-    "preview:docs": "vite preview --base /vue-img-fade/"
+    "preview:docs": "vite preview"
   },
   "dependencies": {
     "vue": "^3.2.45"
