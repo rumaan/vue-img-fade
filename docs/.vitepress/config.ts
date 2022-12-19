@@ -3,6 +3,15 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "Vue Image Fade",
   description: "Simple Image Fade Directive for Vue 3",
+  head: [
+    [
+      "script",
+      {
+        defer: "defer",
+        src: "https://polyfill.io/v3/polyfill.min.js?version=3.111.0&features=IntersectionObserver%2CIntersectionObserverEntry",
+      },
+    ],
+  ],
   themeConfig: {
     socialLinks: [
       { icon: "github", link: "https://github.com/rumaan/vue-img-fade" },
