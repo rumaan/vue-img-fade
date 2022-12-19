@@ -14,7 +14,6 @@ export const vFade: DirectiveType = {
   },
 };
 
-
 export const vFadeAll: DirectiveType = {
   mounted(el, binding) {
     // Find all child <img> nodes
@@ -80,7 +79,7 @@ export const vFadeAll: DirectiveType = {
     const intersectionObserver = new IntersectionObserver(
       intersectionObserverCb,
       {
-        root: el,
+        root: null,
         rootMargin: "0px",
         threshold: 0.01,
       }
