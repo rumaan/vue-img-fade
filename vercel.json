@@ -1,5 +1,5 @@
 {
-  "buildCommand": "yarn build:docs",
-  "outputDirectory": "docs_dist",
+  "buildCommand": "yarn docs:build",
+  "outputDirectory": "docs/.vitepress/dist",
   "trailingSlash": false
 }

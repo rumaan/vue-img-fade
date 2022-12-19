@@ -4,10 +4,10 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build:docs": "vue-tsc && vite build",
-    "build:bundle": "vue-tsc && BUNDLE=true vite build",
-    "preview:docs": "vite preview"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "lib:build": "vue-tsc && vite build"
   },
   "dependencies": {
     "vue": "^3.2.45"

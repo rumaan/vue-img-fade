@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { vFadeAll, vFade } from "../../src";
+import { vFadeAll } from "../../src";
 </script>
 
 <template>
@@ -19,9 +19,9 @@ import { vFadeAll, vFade } from "../../src";
 <style scoped>
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   grid-auto-flow: row;
-  grid-auto-rows: 180px;
+  grid-auto-rows: 120px;
   gap: 8px;
 }
 
@@ -35,8 +35,8 @@ img {
 
 @media (max-width: 700px) {
   .container {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    grid-auto-rows: 140px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-auto-rows: 100px;
   }
 }
 </style>
