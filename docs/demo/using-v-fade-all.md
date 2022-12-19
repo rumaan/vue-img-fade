@@ -9,7 +9,7 @@ import GalleryVFadeAll from "../components/GalleryVFadeAll.vue";
 
 # Using v-fade-all directive
 
-Demo gallery component using `v-fade-all` directive that shows grid of images from [Picsum Photos](https://picsum.photos/). Hard Reload / Empty Caches and Reload the page if you missed to see the transition.
+Demo gallery component using `v-fade-all` directive that shows grid of images from [Picsum Photos](https://picsum.photos/). Reload the page if you missed to see the transition.
 
 <div class="gallery-container">
   <GalleryVFadeAll/>

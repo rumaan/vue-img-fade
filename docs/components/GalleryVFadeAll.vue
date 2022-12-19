@@ -6,7 +6,7 @@ import { vFadeAll } from "../../src";
   <div v-fade-all class="container">
     <div v-for="i in 50" :key="i" class="img-wrapper">
       <img
-        :src="`https://picsum.photos/seed/seed-${i}/400/400`"
+        :src="`https://picsum.photos/seed/v-fade-all-${i}/400/400`"
         alt=""
         width="400"
         height="400"
