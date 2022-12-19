@@ -1,8 +1,8 @@
 {
-  "rewrites": [
-    {
-      "destination": "/",
-      "source": "/vue-img-fade/"
+  "redirects": [
+    {  
+      "source": "/vue-img-fade/",
+      "destination": "/"
     }
   ]
 }
