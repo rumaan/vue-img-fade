@@ -7,10 +7,10 @@ import { vFade } from "../../src";
     <div v-for="i in 50" :key="i" class="img-wrapper">
       <img
         v-fade
-        :src="`https://picsum.photos/500/500?random=${i}`"
+        :src="`https://picsum.photos/seed/seed-${i}/400/400`"
         alt=""
-        width="500"
-        height="500"
+        width="400"
+        height="400"
         loading="lazy"
       />
     </div>
