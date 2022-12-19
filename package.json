@@ -7,7 +7,7 @@
     "dev": "vite",
     "build:docs": "vue-tsc && vite build --base /vue-img-fade/",
     "build:bundle": "vue-tsc && BUNDLE=true vite build",
-    "preview:docs": "vite preview docs"
+    "preview:docs": "vite preview --base /vue-img-fade/"
   },
   "dependencies": {
     "vue": "^3.2.45"

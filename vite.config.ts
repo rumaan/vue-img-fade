@@ -24,7 +24,7 @@ const buildDocsConfig: BuildOptions = {
 
 const buildConfig = process.env.BUNDLE ? buildLibConfig : buildDocsConfig;
 
-console.log("Building ->", process.env.BUNDLE ? "Library" : "Docs");
+console.log("Using buildConfig ->", process.env.BUNDLE ? "Library" : "Docs");
 
 export default defineConfig({
   plugins: [vue()],
