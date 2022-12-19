@@ -19,7 +19,7 @@ const buildLibConfig: BuildOptions = {
 };
 
 const buildDocsConfig: BuildOptions = {
-  outDir: "docs",
+  outDir: "docs_dist",
 };
 
 const buildConfig = process.env.BUNDLE ? buildLibConfig : buildDocsConfig;

@@ -1,3 +1,5 @@
 {
+  "buildCommand": "yarn build:docs",
+  "outputDirectory": "docs_dist",
   "trailingSlash": false
 }
