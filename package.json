@@ -1,0 +1,33 @@
+{
+  "name": "vue-img-fade",
+  "version": "0.0.1",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.16",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "terser": "^5.16.1",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0",
+    "vue-tsc": "^1.0.11"
+  },
+  "files": [
+    "dist"
+  ],
+  "module": "./dist/vue-img-fade.js",
+  "main": "./dist/vue-img-fade.cjs",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-img-fade.js",
+      "require": "./dist/vue-img-fade.umd.cjs"
+    }
+  }
+}
