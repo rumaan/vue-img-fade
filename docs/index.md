@@ -22,5 +22,5 @@ features:
       details: Leverages native web animations API providing flexible keyframe configurations
     - icon: 🚥
       title: Tiny & Lightweight
-      details: Under 1KB G-Zip compressed
+      details: Roughly 1KB G-Zip compressed
 ---

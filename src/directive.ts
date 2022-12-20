@@ -34,7 +34,7 @@ export const vFadeAll: DirectiveType = {
 
       const onload = (e: Event) => {
         const lapsedTime = performance.now() - startTime;
-        if (lapsedTime >= bailOutAnimationTime) {
+        if (lapsedTime > bailOutAnimationTime) {
           const img = e.target as HTMLImageElement;
           // Image took way too long to load
           // so don't wait for other images to finish loading

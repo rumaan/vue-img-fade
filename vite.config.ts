@@ -5,6 +5,8 @@ import { resolve } from "path";
 export default defineConfig({
   plugins: [vue()],
   build: {
+    target: "esnext",
+    minify: "esbuild",
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "VueImgFade",

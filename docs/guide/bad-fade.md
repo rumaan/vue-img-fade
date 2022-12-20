@@ -4,7 +4,7 @@ import GalleryBadFade from "../components/GalleryBadFade.vue";
 
 # Example Bad Staggered Fade Transition
 
-Since images are of different size, when page initially loads the `load` event for each image is fired out of order. (Note: clear cache and reload page if you can't see the fade animation)
+Since images are of different size, when page initially loads the `load` event for each image is fired out of order. (Note: clear cache and reload page if you can't see the out of order fade animation)
 
 <div class="gallery-container">
   <GalleryBadFade/>
