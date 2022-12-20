@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /guide/getting-started
+      link: /guide/what-is-this
     - theme: alt
       text: View on Github
       link: https://github.com/rumaan/vue-img-fade

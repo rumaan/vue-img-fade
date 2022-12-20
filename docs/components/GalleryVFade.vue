@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { vFade } from "../../src";
-const now = +new Date();
 </script>
 
 <template>
@@ -8,10 +7,10 @@ const now = +new Date();
     <div v-for="i in 50" :key="i" class="img-wrapper">
       <img
         v-fade
-        :src="`https://picsum.photos/seed/v-fade-${i}/400/400?v=${now}`"
+        :src="`https://picsum.photos/seed/v-fade-${i}/300/300`"
         alt=""
-        width="400"
-        height="400"
+        width="300"
+        height="300"
         loading="lazy"
       />
     </div>

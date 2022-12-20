@@ -17,30 +17,51 @@ export const vFade: DirectiveType = {
 export const vFadeAll: DirectiveType = {
   mounted(el, binding) {
     // Find all child <img> nodes
-    let allImgs = Array.from(el.querySelectorAll("img"));
+    const allImgs = Array.from(el.querySelectorAll("img"));
+
+    const startTime = performance.now();
+    const bailOutAnimationTime = binding.value?.bailOutAnimationTime ?? 2000; // 2s
 
     const intersectionObserverCb: IntersectionObserverCallback = (
       entries,
       observer
     ) => {
       let currentLoadedImages = 0;
-      const totalVisibleItems = entries.filter((entry) => entry.isIntersecting);
-      const imgEls = allImgs.slice(0, totalVisibleItems.length);
-      const onload = () => {
-        currentLoadedImages++;
-        if (currentLoadedImages === totalVisibleItems.length) {
-          // All images within intersection have been loaded
-          imgEls.forEach((img, index) => {
-            animateEl(img, {
-              animationOptions: {
-                duration: 500,
-                easing: "ease-out",
-                iterations: 1,
-                fill: "forwards",
-                delay: index * 25,
-              },
-            });
+      const totalVisibleItems = entries.filter(
+        (entry) => entry.isIntersecting
+      ).length;
+      const imgEls = allImgs.slice(0, totalVisibleItems);
+
+      const onload = (e: Event) => {
+        const lapsedTime = performance.now() - startTime;
+        if (lapsedTime >= bailOutAnimationTime) {
+          const img = e.target as HTMLImageElement;
+          // Image took way too long to load
+          // so don't wait for other images to finish loading
+          animateEl(img, {
+            animationOptions: {
+              duration: 500,
+              easing: "ease-out",
+              iterations: 1,
+              fill: "forwards",
+            },
           });
+        } else {
+          currentLoadedImages++;
+          if (currentLoadedImages === totalVisibleItems) {
+            // All images within intersection have been loaded
+            imgEls.forEach((img, index) => {
+              animateEl(img, {
+                animationOptions: {
+                  duration: 500,
+                  easing: "ease-out",
+                  iterations: 1,
+                  fill: "forwards",
+                  delay: index * 25,
+                },
+              });
+            });
+          }
         }
       };
 
@@ -53,7 +74,30 @@ export const vFadeAll: DirectiveType = {
         );
 
         if (!entry.isIntersecting) {
-          img.style.opacity = "1";
+          img.addEventListener(
+            "load",
+            () => {
+              animateEl(img, {
+                animationOptions: {
+                  duration: 500,
+                  easing: "ease-out",
+                  iterations: 1,
+                  fill: "forwards",
+                },
+              });
+            },
+            { once: true }
+          );
+          if (img.complete) {
+            animateEl(img, {
+              animationOptions: {
+                duration: 500,
+                easing: "ease-out",
+                iterations: 1,
+                fill: "forwards",
+              },
+            });
+          }
         } else {
           img.loading = "eager";
           img.addEventListener("load", onload, { once: true });

@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { vFadeAll } from "../../src";
-const now = +new Date();
 </script>
 
 <template>
   <div v-fade-all class="container">
     <div v-for="i in 50" :key="i" class="img-wrapper">
       <img
-        :src="`https://picsum.photos/seed/v-fade-all-${i}/400/400?v=${now}`"
+        :src="`https://picsum.photos/seed/v-fade-all-${i}/300/300`"
         alt=""
-        width="400"
-        height="400"
+        width="300"
+        height="300"
         loading="lazy"
       />
     </div>

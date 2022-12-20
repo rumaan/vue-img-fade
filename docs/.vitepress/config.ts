@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import "../style.css";
 
 export default defineConfig({
   title: "Vue Image Fade",
@@ -29,6 +30,10 @@ export default defineConfig({
           {
             text: "What is this plugin?",
             link: "/guide/what-is-this",
+          },
+          {
+            text: "Getting Started",
+            link: "/guide/getting-started",
           },
         ],
       },
