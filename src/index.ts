@@ -1,5 +1,3 @@
-import { vFade, vFadeAll } from "./directive";
-import { useFade } from "./composable";
+import { vFade, vFadeAuto } from "./directive";
 
-
-export { vFade, vFadeAll, useFade };
+export { vFade, vFadeAuto };

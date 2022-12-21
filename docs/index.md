@@ -1,5 +1,5 @@
 ---
-title: Vue Smart Image Fade
+title: Vue Image Fade
 titleTemplate: Add Automatic image fade to your Vue 3 app
 layout: home
 

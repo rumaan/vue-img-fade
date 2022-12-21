@@ -1,36 +1,46 @@
 import type { DirectiveType } from "./types";
-import { useFade } from "./composable";
-import { _defaultTimeout, animateEl } from "./utils";
-
+import { animateEl } from "./utils";
+import { _defaultTimeout } from "./defaults";
 
 export const vFade: DirectiveType = {
   mounted(el, binding) {
     if (el.tagName !== "IMG") {
       console.error(
-        "vFadeIn Error: This directive can be used only on <img> elements",
+        "vFadeIn Error: This directive can be used only on <img> elements"
       );
       return;
     }
-    useFade(el, binding.value);
+    const img = el as HTMLImageElement;
+    img.style.opacity = "0";
+    if (img.complete) {
+      animateEl(img);
+    } else {
+      img.addEventListener(
+        "load",
+        () => {
+          animateEl(img);
+        },
+        { once: true }
+      );
+    }
   },
 };
 
-export const vFadeAll: DirectiveType = {
+export const vFadeAuto: DirectiveType = {
   mounted(el, binding) {
-    // Find all child <img> nodes
     const allImgs = Array.from(el.querySelectorAll("img"));
-
-    const startTime = performance.now();
-    const bailOutAnimationTime = binding.value?.bailOutAnimationTime ?? _defaultTimeout;
+    const startTime = Date.now();
+    const bailOutAnimationTime =
+      binding.value?.bailOutAnimationTime ?? _defaultTimeout;
 
     const intersectionObserverCb: IntersectionObserverCallback = (
       entries,
-      observer,
+      observer
     ) => {
       console.log("intersection observer called");
       let currentLoadedImages = 0;
       const totalVisibleItems = entries.filter(
-        (entry) => entry.isIntersecting,
+        (entry) => entry.isIntersecting
       ).length;
       const imgEls = allImgs.slice(0, totalVisibleItems);
 
@@ -48,8 +58,11 @@ export const vFadeAll: DirectiveType = {
       const onload = (e: Event) => {
         const img = e.target as HTMLImageElement;
         loadedImages.push(img);
-        console.log("onload event called for img index -> " + img.dataset?.index?.toString());
-        const lapsedTime = performance.now() - startTime;
+        console.log(
+          "onload event called for img index -> " +
+            img.dataset?.index?.toString()
+        );
+        const lapsedTime = Date.now() - startTime;
         if (lapsedTime > bailOutAnimationTime) {
           console.log("time elapsed -- bailing out of all load");
           // Image took way too long to load
@@ -76,21 +89,6 @@ export const vFadeAll: DirectiveType = {
         // Debug
         img.dataset.initiallyVisible = String(entry.isIntersecting);
 
-        if (!entry.isIntersecting) {
-          img.addEventListener(
-            "load",
-            () => {
-              animateEl(img);
-            },
-            { once: true },
-          );
-
-        } else {
-          // Don't want lazy loading images that are visible on viewport
-          img.loading = "eager";
-          img.addEventListener("load", onload, { once: true });
-        }
-
         // If image was already loaded previously
         if (img.complete) {
           animateEl(img, {
@@ -98,6 +96,20 @@ export const vFadeAll: DirectiveType = {
               delay: index * 25,
             },
           });
+        } else {
+          if (!entry.isIntersecting) {
+            img.addEventListener(
+              "load",
+              () => {
+                animateEl(img);
+              },
+              { once: true }
+            );
+          } else {
+            // Don't want lazy loading images that are currently visible on viewport
+            img.loading = "eager";
+            img.addEventListener("load", onload, { once: true });
+          }
         }
 
         // Observe each entry only once
@@ -111,7 +123,7 @@ export const vFadeAll: DirectiveType = {
         root: null,
         rootMargin: "0px",
         threshold: 0.01,
-      },
+      }
     );
 
     allImgs.forEach((el, index) => {

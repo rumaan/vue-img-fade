@@ -22,7 +22,7 @@ imageElement.addEventListener("load", (e) => {
 
 But this plugin allows you to just slap a
 simple `v-fade` [directive](https://vuejs.org/guide/reusability/custom-directives.html#custom-directives) on the image
-element, and you're done. Moreover, this plugin also comes with another directive `v-fade-all` which can be added to any
+element, and you're done. Moreover, this plugin also comes with another directive `v-fade-auto` which can be added to any
 parent or container element and will automatically grab all child image elements that are visible in the viewport and
 animate them correctly (i.e. run the animation only when all the images visible in viewport are done loading).
 

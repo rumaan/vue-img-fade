@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 import "../style.css";
 
 export default defineConfig({
+  cleanUrls: "without-subfolders",
   title: "Vue Image Fade",
   description: "Simple Image Fade Directive for Vue 3",
   head: [
@@ -45,8 +46,8 @@ export default defineConfig({
             link: "/demo/using-v-fade",
           },
           {
-            text: "Using v-fade-all",
-            link: "/demo/using-v-fade-all",
+            text: "Using v-fade-auto",
+            link: "/demo/using-v-fade-auto",
           },
         ],
       },

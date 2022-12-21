@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { vFadeAll } from "../../src";
+import { vFadeAuto } from "../../src";
 import Demo from "./Demo.vue";
 import DebugImg from "./DebugImg.vue";
 import { getImgUrl, debugMode } from "../helpers";
@@ -7,7 +7,7 @@ import { getImgUrl, debugMode } from "../helpers";
 
 <template>
   <Demo>
-    <div v-fade-all class="container">
+    <div v-fade-auto class="container">
       <DebugImg :enabled="debugMode" v-for="i in 50" :key="i" v-slot="{ onLoad }">
         <img
           @load="onLoad"
