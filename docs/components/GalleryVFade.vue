@@ -1,43 +1,24 @@
 <script setup lang="ts">
-import { vFade } from "../../src";
+import DebugImg from "./DebugImg.vue";
+import Demo from "./Demo.vue";
+import { withDelay, getImgUrl, debugMode } from "../helpers";
+import { vFade } from "../../src/";
 </script>
 
 <template>
-  <div class="container">
-    <div v-for="i in 50" :key="i" class="img-wrapper">
-      <img
-        v-fade
-        :src="`https://picsum.photos/seed/v-fade-${i}/300/300`"
-        alt=""
-        width="300"
-        height="300"
-        loading="lazy"
-      />
+  <Demo>
+    <div class="container">
+      <DebugImg :enabled="debugMode" v-for="i in 20" :key="i" v-slot="{ onLoad }">
+        <img
+          v-fade
+          @load="onLoad"
+          :src="withDelay(getImgUrl(`v-fade-${i}`), 1000)"
+          alt=""
+          class="demo-img"
+          width="300"
+          height="300"
+        >
+      </DebugImg>
     </div>
-  </div>
+  </Demo>
 </template>
-
-<style scoped>
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  grid-auto-flow: row;
-  grid-auto-rows: 120px;
-  gap: 8px;
-}
-
-img {
-  height: 100%;
-  max-width: 100%;
-  object-fit: cover;
-  object-position: center;
-  user-select: none;
-}
-
-@media (max-width: 700px) {
-  .container {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-auto-rows: 100px;
-  }
-}
-</style>

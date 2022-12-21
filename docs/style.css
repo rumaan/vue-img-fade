@@ -4,3 +4,27 @@
   aspect-ratio: 16 / 9;
   border: 1px solid #eee;
 }
+
+.demo .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-auto-flow: row;
+  grid-auto-rows: 120px;
+  gap: 8px;
+}
+
+.demo .demo-img {
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+}
+
+
+@media (max-width: 700px) {
+  .demo .container {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-auto-rows: 100px;
+  }
+}

@@ -1,42 +1,23 @@
 <script setup lang="ts">
 import { vFadeAll } from "../../src";
+import Demo from "./Demo.vue";
+import DebugImg from "./DebugImg.vue";
+import { getImgUrl, debugMode } from "../helpers";
 </script>
 
 <template>
-  <div v-fade-all class="container">
-    <div v-for="i in 50" :key="i" class="img-wrapper">
-      <img
-        :src="`https://picsum.photos/seed/v-fade-all-${i}/300/300`"
-        alt=""
-        width="300"
-        height="300"
-        loading="lazy"
-      />
+  <Demo>
+    <div v-fade-all class="container">
+      <DebugImg :enabled="debugMode" v-for="i in 50" :key="i" v-slot="{ onLoad }">
+        <img
+          @load="onLoad"
+          :src="getImgUrl(`v-fade-${i}`)"
+          alt=""
+          class="demo-img"
+          width="300"
+          height="300"
+        >
+      </DebugImg>
     </div>
-  </div>
+  </Demo>
 </template>
-
-<style scoped>
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  grid-auto-flow: row;
-  grid-auto-rows: 120px;
-  gap: 8px;
-}
-
-img {
-  height: 100%;
-  max-width: 100%;
-  object-fit: cover;
-  object-position: center;
-  user-select: none;
-}
-
-@media (max-width: 700px) {
-  .container {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-auto-rows: 100px;
-  }
-}
-</style>

@@ -7,13 +7,16 @@ export const useFade = (el: HTMLElement, props: BindingValue) => {
   el.style.opacity = `0`;
 
   const onload = () => {
-    el.animate([{ opacity: 0 }, { opacity: 1 }], {
+    const animation = el.animate([{ opacity: 0 }, { opacity: 1 }], {
       easing: "ease-out",
       delay,
       duration,
       iterations: 1,
       fill: "forwards",
     });
+    animation.addEventListener("finish", () => {
+      el.style.opacity = "1"; // animate() doesn't update style attributes
+    }, { once: true });
   };
   el.addEventListener("load", onload, { once: true });
 };

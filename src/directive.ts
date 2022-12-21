@@ -7,12 +7,12 @@ export const vFade: DirectiveType = {
   mounted(el, binding) {
     if (el.tagName !== "IMG") {
       console.error(
-        "vFadeIn Error: This directive can be used only on <img> elements"
+        "vFadeIn Error: This directive can be used only on <img> elements",
       );
       return;
     }
     useFade(el, binding.value);
-  }
+  },
 };
 
 export const vFadeAll: DirectiveType = {
@@ -20,17 +20,17 @@ export const vFadeAll: DirectiveType = {
     // Find all child <img> nodes
     const allImgs = Array.from(el.querySelectorAll("img"));
 
-    const startTime = Date.now();
-    const bailOutAnimationTime = binding.value?.bailOutAnimationTime ?? _defaultTimeout; // 4s
+    const startTime = performance.now();
+    const bailOutAnimationTime = binding.value?.bailOutAnimationTime ?? _defaultTimeout;
 
     const intersectionObserverCb: IntersectionObserverCallback = (
       entries,
-      observer
+      observer,
     ) => {
       console.log("intersection observer called");
       let currentLoadedImages = 0;
       const totalVisibleItems = entries.filter(
-        (entry) => entry.isIntersecting
+        (entry) => entry.isIntersecting,
       ).length;
       const imgEls = allImgs.slice(0, totalVisibleItems);
 
@@ -49,7 +49,7 @@ export const vFadeAll: DirectiveType = {
         const img = e.target as HTMLImageElement;
         loadedImages.push(img);
         console.log("onload event called for img index -> " + img.dataset?.index?.toString());
-        const lapsedTime = Date.now() - startTime;
+        const lapsedTime = performance.now() - startTime;
         if (lapsedTime > bailOutAnimationTime) {
           console.log("time elapsed -- bailing out of all load");
           // Image took way too long to load
@@ -63,8 +63,8 @@ export const vFadeAll: DirectiveType = {
             imgEls.forEach((img, index) => {
               animateEl(img, {
                 animationOptions: {
-                  delay: index * 25
-                }
+                  delay: index * 25,
+                },
               });
             });
           }
@@ -82,7 +82,7 @@ export const vFadeAll: DirectiveType = {
             () => {
               animateEl(img);
             },
-            { once: true }
+            { once: true },
           );
         } else {
           // Don't want lazy loading images that are visible on viewport
@@ -92,8 +92,8 @@ export const vFadeAll: DirectiveType = {
           if (img.complete) {
             animateEl(img, {
               animationOptions: {
-                delay: index * 25
-              }
+                delay: index * 25,
+              },
             });
           }
         }
@@ -108,8 +108,8 @@ export const vFadeAll: DirectiveType = {
       {
         root: null,
         rootMargin: "0px",
-        threshold: 0.01
-      }
+        threshold: 0.01,
+      },
     );
 
     allImgs.forEach((el, index) => {
@@ -121,5 +121,5 @@ export const vFadeAll: DirectiveType = {
       el.dataset.index = String(index);
       intersectionObserver.observe(el);
     });
-  }
+  },
 };

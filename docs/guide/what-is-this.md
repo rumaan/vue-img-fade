@@ -6,6 +6,11 @@ title: What is Vue Image Fade Plugin?
 
 TL;DR It's a vue plugin that simplifies animating images on load.
 
+:::warning NOTE
+This plugin is currently in `alpha` status. I haven't tested it across all use-cases and scenarios. It may not be production ready just yet.
+:::
+
+
 This plugin more or less does the following:
 
 ```js
