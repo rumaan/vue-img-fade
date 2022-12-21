@@ -84,18 +84,20 @@ export const vFadeAll: DirectiveType = {
             },
             { once: true },
           );
+
         } else {
           // Don't want lazy loading images that are visible on viewport
           img.loading = "eager";
           img.addEventListener("load", onload, { once: true });
-          // If image was already loaded previously,
-          if (img.complete) {
-            animateEl(img, {
-              animationOptions: {
-                delay: index * 25,
-              },
-            });
-          }
+        }
+
+        // If image was already loaded previously
+        if (img.complete) {
+          animateEl(img, {
+            animationOptions: {
+              delay: index * 25,
+            },
+          });
         }
 
         // Observe each entry only once
