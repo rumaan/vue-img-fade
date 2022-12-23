@@ -5,10 +5,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { vFade } from "../../src/directive";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
-const props = withDefaults(defineProps<{ enabled?: boolean }>(), {
+withDefaults(defineProps<{ enabled?: boolean }>(), {
   enabled: true,
 });
 
@@ -42,7 +41,6 @@ const onLoadComplete = () => {
 const status = computed<string>(() => {
   return loaded.value ? "loaded" : "loading";
 });
-
 </script>
 
 <template>
@@ -50,7 +48,9 @@ const status = computed<string>(() => {
     <slot v-bind:onLoad="onLoadComplete"></slot>
     <div v-if="enabled" class="stats">
       <span>time: {{ elapsedTime.toFixed(2) }}s</span>
-      <span>status: <span :class="status">{{ status }}</span></span>
+      <span
+        >status: <span :class="status">{{ status }}</span></span
+      >
     </div>
   </div>
 </template>

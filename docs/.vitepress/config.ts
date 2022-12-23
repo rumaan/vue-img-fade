@@ -2,9 +2,16 @@ import { defineConfig } from "vitepress";
 import "../style.css";
 
 export default defineConfig({
+  lang: "en-US",
+  lastUpdated: true,
   cleanUrls: "without-subfolders",
   title: "Vue Image Fade",
   description: "Simple Image Fade Directive for Vue 3",
+  markdown: {
+    headers: {
+      level: [0, 0],
+    },
+  },
   head: [
     [
       "script",
@@ -54,7 +61,7 @@ export default defineConfig({
     ],
     footer: {
       message: "Released under the MIT License.",
-      copyright: "Copyright © 2022-PRESENT Rumaan",
+      copyright: "Copyright © 2022-PRESENT Rumaan K",
     },
   },
 });

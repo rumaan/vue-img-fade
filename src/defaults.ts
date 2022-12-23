@@ -12,6 +12,6 @@ const _defaultKeyFrames: Keyframe[] = [
   { opacity: 1, transform: `translate3D(0, 0, 0)` },
 ];
 
-const reducedMotionKeyFrames: Keyframe[] = [{ opacity: 0 }, { opacity: 1 }];
+const _reducedMotionKeyFrames: Keyframe[] = [{ opacity: 0 }, { opacity: 1 }];
 
-export { _defaultTimeout, _defaultKeyFrames, _defaultAnimationOptions, reducedMotionKeyFrames };
+export { _defaultTimeout, _defaultKeyFrames, _defaultAnimationOptions, _reducedMotionKeyFrames };

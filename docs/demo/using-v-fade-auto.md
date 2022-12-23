@@ -26,8 +26,8 @@ import { getImgUrl, debugMode } from "../helpers";
 
 <template>
   <Demo>
-    <div v-fade-auto class="container">
-      <DebugImg :enabled="debugMode" v-for="i in 50" :key="i" v-slot="{ onLoad }"> 
+    <div v-fade-auto="{ animationOptions: { staggeredItemDelay: 25 } }" class="container">
+      <DebugImg :enabled="debugMode" v-for="i in 50" :key="i" v-slot="{ onLoad }">
         <img
           @load="onLoad"
           :src="getImgUrl(`v-fade-${i}`)"

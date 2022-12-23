@@ -8,7 +8,12 @@ import { vFade } from "../../src/";
 <template>
   <Demo>
     <div class="container">
-      <DebugImg :enabled="debugMode" v-for="i in 20" :key="i" v-slot="{ onLoad }">
+      <DebugImg
+        :enabled="debugMode"
+        v-for="i in 20"
+        :key="i"
+        v-slot="{ onLoad }"
+      >
         <img
           v-fade
           @load="onLoad"
@@ -17,7 +22,7 @@ import { vFade } from "../../src/";
           class="demo-img"
           width="300"
           height="300"
-        >
+        />
       </DebugImg>
     </div>
   </Demo>

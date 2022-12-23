@@ -1,16 +1,19 @@
-import { _defaultAnimationOptions, _defaultKeyFrames, reducedMotionKeyFrames } from "./defaults";
+import {
+  _defaultAnimationOptions,
+  _defaultKeyFrames,
+  _reducedMotionKeyFrames,
+} from "./defaults";
+import type { Options } from "./types";
 
 const prefersReducedMotion = (): boolean => {
-  return window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 };
-
-type Options = { keyframes?: Keyframe[]; animationOptions?: KeyframeAnimationOptions }
 
 export const animateEl = (el: HTMLElement, options?: Options) => {
   let _animationOptions: KeyframeAnimationOptions = _defaultAnimationOptions;
-  let _keyframes: Keyframe[] = prefersReducedMotion() ? reducedMotionKeyFrames : _defaultKeyFrames;
+  let _keyframes: Keyframe[] = prefersReducedMotion()
+    ? _reducedMotionKeyFrames
+    : _defaultKeyFrames;
 
   if (options) {
     const { animationOptions, keyframes } = options;
@@ -24,7 +27,11 @@ export const animateEl = (el: HTMLElement, options?: Options) => {
   }
 
   const animation = el.animate(_keyframes, _animationOptions);
-  animation.addEventListener("finish", () => {
-    el.style.opacity = "1"; // animate() doesn't update style attributes
-  }, { once: true });
+  animation.addEventListener(
+    "finish",
+    () => {
+      el.style.opacity = "1"; // animate() doesn't update style attributes
+    },
+    { once: true }
+  );
 };

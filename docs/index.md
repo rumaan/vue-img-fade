@@ -19,8 +19,11 @@ features:
       details: Just add one line as a directive and this plugin handles the rest.
     - icon: ✨
       title: Uses Web Animations API
-      details: Leverages native web animations API providing flexible keyframe configurations
+      details: Leverages native web animations API providing flexible keyframe configurations.
     - icon: 🚥
       title: Tiny & Lightweight
-      details: Roughly 1KB G-Zip compressed
+      details: Compiled package is roughly around 1kB gzip compressed.
+    - icon: ⛑️
+      title: Type-Safe
+      details: Written in Typescript which provides better IDE completion.
 ---

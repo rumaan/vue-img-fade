@@ -31,7 +31,7 @@ export const vFadeAuto: DirectiveType = {
     const allImgs = Array.from(el.querySelectorAll("img"));
     const startTime = Date.now();
     const bailOutAnimationTime =
-      binding.value?.bailOutAnimationTime ?? _defaultTimeout;
+      binding.value?.animationOptions?.animationTimeout ?? _defaultTimeout;
 
     const intersectionObserverCb: IntersectionObserverCallback = (
       entries,
@@ -76,7 +76,9 @@ export const vFadeAuto: DirectiveType = {
             imgEls.forEach((img, index) => {
               animateEl(img, {
                 animationOptions: {
-                  delay: index * 25,
+                  delay:
+                    index *
+                    (binding.value?.animationOptions?.staggeredItemDelay ?? 0),
                 },
               });
             });
@@ -93,7 +95,9 @@ export const vFadeAuto: DirectiveType = {
         if (img.complete) {
           animateEl(img, {
             animationOptions: {
-              delay: index * 25,
+              delay:
+                index *
+                (binding.value?.animationOptions?.staggeredItemDelay ?? 0),
             },
           });
         } else {

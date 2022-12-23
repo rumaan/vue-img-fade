@@ -1,15 +1,15 @@
 import type { ObjectDirective } from "vue";
 
-export type BindingValueProps = {
-  duration?: number;
-  delay?: number;
-  /**
-   * Timeout to wait for all images to be loaded in milliseconds
-   * @default 2000
-   */
-  bailOutAnimationTime?: number;
-}; // TODO: add more props
+export type KeyframeOptions = KeyframeAnimationOptions & {
+  animationTimeout?: number;
+  staggeredItemDelay?: number;
+};
 
-export type BindingValue = Partial<BindingValueProps> | undefined;
+export type Options = {
+  keyframes?: Keyframe[];
+  animationOptions?: KeyframeOptions;
+};
+
+export type BindingValue = Partial<Options> | undefined;
 
 export type DirectiveType = ObjectDirective<HTMLElement, BindingValue>;
