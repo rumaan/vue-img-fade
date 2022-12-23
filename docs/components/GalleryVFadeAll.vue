@@ -8,7 +8,9 @@ import { getImgUrl, debugMode } from "../helpers";
 <template>
   <Demo>
     <div
-      v-fade-auto="{ animationOptions: { staggeredItemDelay: 25 } }"
+      v-fade-auto="{
+        animationOptions: { delayFn: (itemIndex) => itemIndex * 25 },
+      }"
       class="container"
     >
       <DebugImg

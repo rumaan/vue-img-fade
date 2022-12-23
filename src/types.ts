@@ -2,7 +2,7 @@ import type { ObjectDirective } from "vue";
 
 export type KeyframeOptions = KeyframeAnimationOptions & {
   animationTimeout?: number;
-  staggeredItemDelay?: number;
+  delayFn?: (itemIndex: number) => number;
 };
 
 export type Options = {

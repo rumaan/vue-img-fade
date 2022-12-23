@@ -32,6 +32,23 @@ export const vFadeAuto: DirectiveType = {
     const startTime = Date.now();
     const bailOutAnimationTime =
       binding.value?.animationOptions?.animationTimeout ?? _defaultTimeout;
+    let loadedImages: HTMLElement[] = [];
+
+    const animateLoadedImages = () => {
+      while (loadedImages.length) {
+        const el = loadedImages.pop();
+        if (el) {
+          animateEl(el, binding.value);
+        }
+      }
+    };
+
+    setTimeout(() => {
+      if (loadedImages.length) {
+        console.debug("time elapsed in setTimeout -- bailing out of all load");
+        animateLoadedImages();
+      }
+    }, bailOutAnimationTime);
 
     const intersectionObserverCb: IntersectionObserverCallback = (
       entries,
@@ -44,17 +61,6 @@ export const vFadeAuto: DirectiveType = {
       ).length;
       const imgEls = allImgs.slice(0, totalVisibleItems);
 
-      const loadedImages: HTMLElement[] = [];
-
-      const animateLoadedImages = () => {
-        while (loadedImages.length) {
-          const el = loadedImages.pop();
-          if (el) {
-            animateEl(el);
-          }
-        }
-      };
-
       const onload = (e: Event) => {
         const img = e.target as HTMLImageElement;
         loadedImages.push(img);
@@ -64,9 +70,10 @@ export const vFadeAuto: DirectiveType = {
         );
         const lapsedTime = Date.now() - startTime;
         if (lapsedTime > bailOutAnimationTime) {
-          console.log("time elapsed -- bailing out of all load");
+          console.log("time elapsed in onload -- bailing out of all load");
           // Image took way too long to load
           // so don't wait for other images to finish loading
+          // This edge case can happen when this image finished loading after setTimeout has already run
           animateLoadedImages();
         } else {
           currentLoadedImages++;
@@ -74,14 +81,17 @@ export const vFadeAuto: DirectiveType = {
             console.log("all images have been loaded");
             // All images within intersection have been loaded
             imgEls.forEach((img, index) => {
+              const delay =
+                binding.value?.animationOptions?.delayFn?.(index) ?? 0;
               animateEl(img, {
                 animationOptions: {
-                  delay:
-                    index *
-                    (binding.value?.animationOptions?.staggeredItemDelay ?? 0),
+                  delay,
+                  ...binding.value?.animationOptions,
                 },
+                keyframes: binding.value?.keyframes,
               });
             });
+            loadedImages = [];
           }
         }
       };
@@ -93,19 +103,20 @@ export const vFadeAuto: DirectiveType = {
 
         // If image was already loaded previously
         if (img.complete) {
+          const delay = binding.value?.animationOptions?.delayFn?.(index) ?? 0;
           animateEl(img, {
             animationOptions: {
-              delay:
-                index *
-                (binding.value?.animationOptions?.staggeredItemDelay ?? 0),
+              delay,
+              ...binding.value?.animationOptions,
             },
+            keyframes: binding.value?.keyframes,
           });
         } else {
           if (!entry.isIntersecting) {
             img.addEventListener(
               "load",
               () => {
-                animateEl(img);
+                animateEl(img, binding.value);
               },
               { once: true }
             );

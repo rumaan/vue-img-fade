@@ -16,7 +16,7 @@ from [Picsum Photos](https://picsum.photos/). Reload the page if you missed to s
 
 **Demo Code**
 
-```vue{10}
+```vue{11-13}
 <script setup lang="ts">
 import { vFadeAll } from "../../src";
 import Demo from "./Demo.vue";
@@ -26,7 +26,11 @@ import { getImgUrl, debugMode } from "../helpers";
 
 <template>
   <Demo>
-    <div v-fade-auto="{ animationOptions: { staggeredItemDelay: 25 } }" class="container">
+    <div
+      v-fade-auto="{
+        animationOptions: { delayFn: (itemIndex) => itemIndex * 25 },
+      }"
+      class="container">
       <DebugImg :enabled="debugMode" v-for="i in 50" :key="i" v-slot="{ onLoad }">
         <img
           @load="onLoad"

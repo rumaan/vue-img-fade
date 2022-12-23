@@ -4,7 +4,6 @@ import "../style.css";
 export default defineConfig({
   lang: "en-US",
   lastUpdated: true,
-  cleanUrls: "without-subfolders",
   title: "Vue Image Fade",
   description: "Simple Image Fade Directive for Vue 3",
   markdown: {
