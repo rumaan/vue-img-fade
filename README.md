@@ -1,6 +1,9 @@
 # Vue Image Fade
 One liner image fade plugin that adds transitions to images on load.
 
+## Docs
+https://vue-img-fade.vercel.app
+
 ## Features
 - 🚥 Lightweight ~1kB gzip
 - ️️⛑️ Typescript + Vite
@@ -46,9 +49,6 @@ import { vFadeAuto } from "vue-img-fade";
   <img v-fade="{ keyframes, animationOptions }" />
 </template>
 ```
-
-## Docs
-https://vue-img-fade.vercel.app
 
 ## Demo
 https://vue-img-fade.vercel.app/demo/using-v-fade.html
