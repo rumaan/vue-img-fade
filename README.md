@@ -52,3 +52,17 @@ import { vFadeAuto } from "vue-img-fade";
 
 ## Demo
 https://vue-img-fade.vercel.app/demo/using-v-fade.html
+
+## Development
+### Plugin
+[tsup](http://tsup.egoist.dev) is used to build the library.
+```sh
+yarn lib:build
+```
+### Docs
+```sh
+yarn docs:dev
+```
+```sh
+yarn docs:build
+```
