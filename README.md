@@ -1,18 +1,54 @@
-# Vue 3 + TypeScript + Vite
+# Vue Image Fade
+One liner image fade plugin that adds transitions to images on load.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Features
+- 🚥 Lightweight ~1kB gzip
+- ️️⛑️ Typescript + Vite
+- 🛠️ Simple One-Liner Directive
+- ✨ Web Animations API for customizing timelines
 
-## Recommended IDE Setup
+## Installation and Usage
+```sh
+yarn add vue-img-fade
+```
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+`v-fade`:
+```vue
+<script setup lang="ts">
+import { vFade } from "vue-img-fade";
+</script>
+<template>
+  <div>
+    <img v-fade src="..." alt="..." width="100" height="100">
+  </div>
+</template>
+```
 
-## Type Support For `.vue` Imports in TS
+`v-fade-auto`:
+```vue
+<script setup lang="ts">
+import { vFadeAuto } from "vue-img-fade";
+</script>
+<template>
+  <div v-fade-auto>
+    <!-- width/height is required for v-fade-auto to work correctly -->
+    <img src="..." alt="..." width="100" height="100">
+    <img src="..." alt="..." width="100" height="100">
+    <!-- ... -->
+    <img src="..." alt="..." width="100" height="100">
+  </div>
+</template>
+```
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## Custom Options
+```vue
+<template>
+  <img v-fade="{ keyframes, animationOptions }" />
+</template>
+```
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Docs
+https://vue-img-fade.vercel.app
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Demo
+https://vue-img-fade.vercel.app/demo/using-v-fade.html
