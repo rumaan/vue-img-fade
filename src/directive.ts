@@ -82,7 +82,7 @@ export const vFadeAuto: DirectiveType = {
             // All images within intersection have been loaded
             imgEls.forEach((img, index) => {
               const delay =
-                binding.value?.animationOptions?.delayFn?.(index) ?? 0;
+                binding.value?.animationOptions?.itemDelayFn?.(index) ?? 0;
               animateEl(img, {
                 animationOptions: {
                   delay,
@@ -103,7 +103,8 @@ export const vFadeAuto: DirectiveType = {
 
         // If image was already loaded previously
         if (img.complete) {
-          const delay = binding.value?.animationOptions?.delayFn?.(index) ?? 0;
+          const delay =
+            binding.value?.animationOptions?.itemDelayFn?.(index) ?? 0;
           animateEl(img, {
             animationOptions: {
               delay,

@@ -8,8 +8,8 @@ const _defaultAnimationOptions: KeyframeAnimationOptions = {
 };
 
 const _defaultKeyFrames: Keyframe[] = [
-  { opacity: 0, transform: `translate3D(0, 5px, 0)` },
-  { opacity: 1, transform: `translate3D(0, 0, 0)` },
+  { opacity: 0 },
+  { opacity: 1 },
 ];
 
 const _reducedMotionKeyFrames: Keyframe[] = [{ opacity: 0 }, { opacity: 1 }];

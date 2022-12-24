@@ -14,35 +14,8 @@ from [Picsum Photos](https://picsum.photos/). Reload the page if you missed to s
 
 <GalleryVFadeAll/>
 
-**Demo Code**
+**Code:**
 
-```vue{11-13}
-<script setup lang="ts">
-import { vFadeAll } from "../../src";
-import Demo from "./Demo.vue";
-import DebugImg from "./DebugImg.vue";
-import { getImgUrl, debugMode } from "../helpers";
-</script>
+<<< @/components/GalleryVFadeAll.vue{11-17}
 
-<template>
-  <Demo>
-    <div
-      v-fade-auto="{
-        animationOptions: { delayFn: (itemIndex) => itemIndex * 25 },
-      }"
-      class="container">
-      <DebugImg :enabled="debugMode" v-for="i in 50" :key="i" v-slot="{ onLoad }">
-        <img
-          @load="onLoad"
-          :src="getImgUrl(`v-fade-${i}`)"
-          alt=""
-          class="demo-img"
-          width="300"
-          height="300"
-        >
-      </DebugImg>
-    </div>
-  </Demo>
-</template>
-
-```
+[**Source**](https://github.com/rumaan/vue-img-fade/blob/0a85fb1c3f4af45d006fb13e18ba4df17091d2dc/docs/components/GalleryVFadeAll.vue#L11)

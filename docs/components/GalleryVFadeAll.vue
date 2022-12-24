@@ -9,7 +9,11 @@ import { getImgUrl, debugMode } from "../helpers";
   <Demo>
     <div
       v-fade-auto="{
-        animationOptions: { delayFn: (itemIndex) => itemIndex * 25 },
+        animationOptions: { itemDelayFn: (index) => index * 25 },
+        keyframes: [
+          { opacity: 0, transform: 'translate3d(0, 5px, 0)' },
+          { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+        ],
       }"
       class="container"
     >

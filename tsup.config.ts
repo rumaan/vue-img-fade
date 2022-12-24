@@ -1,4 +1,5 @@
 import { defineConfig } from "tsup";
+import analyze from "rollup-plugin-analyzer"
 
 export default defineConfig({
   entry: ["src/index.ts"],

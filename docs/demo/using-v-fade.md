@@ -15,32 +15,8 @@ the transition.
 
 <GalleryVFade/>
 
-**Demo Code**
+**Code**
 
-```vue{13}
-<script setup lang="ts">
-import DebugImg from "./DebugImg.vue";
-import Demo from "./Demo.vue";
-import { withDelay, getImgUrl, debugMode } from "../helpers";
-import { vFade } from "../../src/";
-</script>
+<<< @/components/GalleryVFade.vue{18}
 
-<template>
-  <Demo>
-    <div class="container">
-      <DebugImg :enabled="debugMode" v-for="i in 20" :key="i" v-slot="{ onLoad }">
-        <img
-          v-fade
-          @load="onLoad"
-          :src="withDelay(getImgUrl(`v-fade-${i}`), 1000)"
-          alt=""
-          class="demo-img"
-          width="300"
-          height="300"
-        >
-      </DebugImg>
-    </div>
-  </Demo>
-</template>
-
-```
+[**Source**](https://github.com/rumaan/vue-img-fade/blob/0a85fb1c3f4af45d006fb13e18ba4df17091d2dc/docs/components/GalleryVFade.vue#L18)

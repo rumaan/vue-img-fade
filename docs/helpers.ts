@@ -1,6 +1,9 @@
 import { useStorage } from "@vueuse/core";
 
 export const withDelay = (url: string, ms: number = 0) => {
+  if (ms <= 0) {
+    return url;
+  }
   return `https://app.requestly.io/delay/${ms}/${url}`;
 };
 
