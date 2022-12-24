@@ -41,14 +41,13 @@
   "files": [
     "dist"
   ],
-  "source": "src/index.ts",
-  "module": "./dist/vue-img-fade.js",
-  "main": "./dist/vue-img-fade.cjs",
+  "module": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/vue-img-fade.js",
-      "require": "./dist/vue-img-fade.umd.cjs",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
     }
   }
