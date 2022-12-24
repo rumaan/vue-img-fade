@@ -13,12 +13,12 @@ export const vFade: DirectiveType = {
     const img = el as HTMLImageElement;
     img.style.opacity = "0";
     if (img.complete) {
-      animateEl(img);
+      animateEl(img, binding.value);
     } else {
       img.addEventListener(
         "load",
         () => {
-          animateEl(img);
+          animateEl(img, binding.value);
         },
         { once: true }
       );
