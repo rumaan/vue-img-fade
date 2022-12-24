@@ -1,6 +1,6 @@
 ---
 title: Vue Image Fade
-titleTemplate: Add Automatic image fade to your Vue 3 app
+titleTemplate: Plugin to Transition images on load
 layout: home
 
 hero:
