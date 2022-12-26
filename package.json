@@ -15,7 +15,7 @@
   },
   "homepage": "https://vue-img-fade.vercel.app/",
   "author": "Rumaan K <hey@rumaan.dev>",
-  "version": "0.0.1-alpha.12",
+  "version": "0.0.1-alpha.13",
   "license": "MIT",
   "type": "module",
   "scripts": {

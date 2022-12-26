@@ -45,7 +45,6 @@ export const vFadeAuto: DirectiveType = {
 
     setTimeout(() => {
       if (loadedImages.length) {
-        console.debug("time elapsed in setTimeout -- bailing out of all load");
         animateLoadedImages();
       }
     }, bailOutAnimationTime);
@@ -54,7 +53,6 @@ export const vFadeAuto: DirectiveType = {
       entries,
       observer
     ) => {
-      console.log("intersection observer called");
       let currentLoadedImages = 0;
       const totalVisibleItems = entries.filter(
         (entry) => entry.isIntersecting
@@ -64,13 +62,8 @@ export const vFadeAuto: DirectiveType = {
       const onload = (e: Event) => {
         const img = e.target as HTMLImageElement;
         loadedImages.push(img);
-        console.log(
-          "onload event called for img index -> " +
-            img.dataset?.index?.toString()
-        );
         const lapsedTime = Date.now() - startTime;
         if (lapsedTime > bailOutAnimationTime) {
-          console.log("time elapsed in onload -- bailing out of all load");
           // Image took way too long to load
           // so don't wait for other images to finish loading
           // This edge case can happen when this image finished loading after setTimeout has already run
@@ -78,7 +71,6 @@ export const vFadeAuto: DirectiveType = {
         } else {
           currentLoadedImages++;
           if (currentLoadedImages === totalVisibleItems) {
-            console.log("all images have been loaded");
             // All images within intersection have been loaded
             imgEls.forEach((img, index) => {
               const delay =
@@ -143,7 +135,6 @@ export const vFadeAuto: DirectiveType = {
     );
 
     allImgs.forEach((el, index) => {
-      console.log("setting defaults for all imgs");
       if (!el.getAttribute("width") || !el.getAttribute("height")) {
         console.error("Image doesn't have width or height property set.", el);
       }
