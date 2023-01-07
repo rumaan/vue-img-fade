@@ -30,7 +30,7 @@ export const animateEl = (el: HTMLElement, options?: Options) => {
   animation.addEventListener(
     "finish",
     () => {
-      el.style.opacity = "1"; // animate() doesn't update style attributes
+      animation.commitStyles();
     },
     { once: true }
   );

@@ -17,7 +17,7 @@ export const useFade = (el: HTMLElement, props: BindingValue) => {
     animation.addEventListener(
       "finish",
       () => {
-        el.style.opacity = "1"; // animate() doesn't update style attributes
+        animation.commitStyles();
       },
       { once: true }
     );
