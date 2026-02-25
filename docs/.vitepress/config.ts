@@ -15,13 +15,6 @@ export default defineConfig({
     [
       "script",
       {
-        defer: "defer",
-        src: "https://polyfill.io/v3/polyfill.min.js?version=3.111.0&features=IntersectionObserver%2CIntersectionObserverEntry",
-      },
-    ],
-    [
-      "script",
-      {
         "data-goatcounter": "https://vue-img-fade.goatcounter.com/count",
         async: "async",
         src: "https://gc.zgo.at/count.js",

@@ -12,6 +12,13 @@ const _defaultKeyFrames: Keyframe[] = [
   { opacity: 1 },
 ];
 
-const _reducedMotionKeyFrames: Keyframe[] = [{ opacity: 0 }, { opacity: 1 }];
+const _reducedMotionKeyFrames: Keyframe[] = [{ opacity: 1 }];
 
-export { _defaultTimeout, _defaultKeyFrames, _defaultAnimationOptions, _reducedMotionKeyFrames };
+const _reducedMotionAnimationOptions: KeyframeAnimationOptions = {
+  duration: 0,
+  easing: "linear",
+  iterations: 1,
+  fill: "forwards",
+};
+
+export { _defaultTimeout, _defaultKeyFrames, _defaultAnimationOptions, _reducedMotionKeyFrames, _reducedMotionAnimationOptions };

@@ -6,7 +6,7 @@ export const vFade: DirectiveType = {
   mounted(el, binding) {
     if (el.tagName !== "IMG") {
       console.error(
-        "vFadeIn Error: This directive can be used only on <img> elements"
+        "vFade Error: This directive can be used only on <img> elements"
       );
       return;
     }
@@ -26,24 +26,27 @@ export const vFade: DirectiveType = {
   },
 };
 
+const cleanupMap = new WeakMap<
+  HTMLElement,
+  { observer: IntersectionObserver; timeoutId: ReturnType<typeof setTimeout> }
+>();
+
 export const vFadeAuto: DirectiveType = {
   mounted(el, binding) {
     const allImgs = Array.from(el.querySelectorAll("img"));
     const startTime = Date.now();
     const bailOutAnimationTime =
       binding.value?.animationOptions?.animationTimeout ?? _defaultTimeout;
-    let loadedImages: HTMLElement[] = [];
+    let loadedImages: HTMLImageElement[] = [];
 
     const animateLoadedImages = () => {
-      while (loadedImages.length) {
-        const el = loadedImages.pop();
-        if (el) {
-          animateEl(el, binding.value);
-        }
+      for (const img of loadedImages) {
+        animateEl(img, binding.value);
       }
+      loadedImages = [];
     };
 
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       if (loadedImages.length) {
         animateLoadedImages();
       }
@@ -53,11 +56,12 @@ export const vFadeAuto: DirectiveType = {
       entries,
       observer
     ) => {
+      const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+      const nonCompleteVisibleCount = visibleEntries.filter((entry) => {
+        const img = entry.target as HTMLImageElement;
+        return !img.complete;
+      }).length;
       let currentLoadedImages = 0;
-      const totalVisibleItems = entries.filter(
-        (entry) => entry.isIntersecting
-      ).length;
-      const imgEls = allImgs.slice(0, totalVisibleItems);
 
       const onload = (e: Event) => {
         const img = e.target as HTMLImageElement;
@@ -70,15 +74,20 @@ export const vFadeAuto: DirectiveType = {
           animateLoadedImages();
         } else {
           currentLoadedImages++;
-          if (currentLoadedImages === totalVisibleItems) {
-            // All images within intersection have been loaded
-            imgEls.forEach((img, index) => {
+          if (currentLoadedImages === nonCompleteVisibleCount) {
+            // All non-cached visible images have been loaded
+            // Animate them all together with staggered delays
+            const allVisibleImgs = visibleEntries.map(
+              (entry) => entry.target as HTMLImageElement
+            );
+            allVisibleImgs.forEach((img) => {
+              const imgIndex = Number(img.dataset.index ?? 0);
               const delay =
-                binding.value?.animationOptions?.itemDelayFn?.(index) ?? 0;
+                binding.value?.animationOptions?.itemDelayFn?.(imgIndex) ?? 0;
               animateEl(img, {
                 animationOptions: {
-                  delay,
                   ...binding.value?.animationOptions,
+                  delay,
                 },
                 keyframes: binding.value?.keyframes,
               });
@@ -88,19 +97,20 @@ export const vFadeAuto: DirectiveType = {
         }
       };
 
-      entries.forEach((entry, index) => {
+      entries.forEach((entry) => {
         const img = entry.target as HTMLImageElement;
+        const imgIndex = Number(img.dataset.index ?? 0);
         // Debug
         img.dataset.initiallyVisible = String(entry.isIntersecting);
 
-        // If image was already loaded previously
+        // If image was already loaded previously (cached)
         if (img.complete) {
           const delay =
-            binding.value?.animationOptions?.itemDelayFn?.(index) ?? 0;
+            binding.value?.animationOptions?.itemDelayFn?.(imgIndex) ?? 0;
           animateEl(img, {
             animationOptions: {
-              delay,
               ...binding.value?.animationOptions,
+              delay,
             },
             keyframes: binding.value?.keyframes,
           });
@@ -142,5 +152,16 @@ export const vFadeAuto: DirectiveType = {
       el.dataset.index = String(index);
       intersectionObserver.observe(el);
     });
+
+    cleanupMap.set(el, { observer: intersectionObserver, timeoutId });
+  },
+
+  unmounted(el) {
+    const cleanup = cleanupMap.get(el);
+    if (cleanup) {
+      cleanup.observer.disconnect();
+      clearTimeout(cleanup.timeoutId);
+      cleanupMap.delete(el);
+    }
   },
 };
