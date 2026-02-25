@@ -2,6 +2,7 @@ import {
   _defaultAnimationOptions,
   _defaultKeyFrames,
   _reducedMotionKeyFrames,
+  _reducedMotionAnimationOptions,
 } from "./defaults";
 import type { Options } from "./types";
 
@@ -10,12 +11,16 @@ const prefersReducedMotion = (): boolean => {
 };
 
 export const animateEl = (el: HTMLElement, options?: Options) => {
-  let _animationOptions: KeyframeAnimationOptions = _defaultAnimationOptions;
-  let _keyframes: Keyframe[] = prefersReducedMotion()
+  const reducedMotion = prefersReducedMotion();
+
+  let _animationOptions: KeyframeAnimationOptions = reducedMotion
+    ? _reducedMotionAnimationOptions
+    : _defaultAnimationOptions;
+  let _keyframes: Keyframe[] = reducedMotion
     ? _reducedMotionKeyFrames
     : _defaultKeyFrames;
 
-  if (options) {
+  if (options && !reducedMotion) {
     const { animationOptions, keyframes } = options;
     _animationOptions = {
       ..._defaultAnimationOptions,
@@ -30,7 +35,12 @@ export const animateEl = (el: HTMLElement, options?: Options) => {
   animation.addEventListener(
     "finish",
     () => {
-      animation.commitStyles();
+      try {
+        animation.commitStyles();
+      } catch {
+        // Element may have been removed from the DOM before animation finished
+        el.style.opacity = "1";
+      }
     },
     { once: true }
   );
